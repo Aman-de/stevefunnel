@@ -568,6 +568,27 @@ function App() {
         </AnimatePresence>
 
       </main>
+
+      {/* REQUIRED COMPLIANCE FOOTER */}
+      <footer className="w-full relative z-10 border-t border-white/5 bg-[#030303] py-10 md:py-16 mt-12 md:mt-0 pb-32 md:pb-16">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6">
+          <div className="text-[10px] md:text-xs text-gray-500/70 leading-relaxed font-light text-center max-w-4xl mx-auto flex flex-col gap-4">
+            <p>
+              <span className="font-semibold text-gray-400">Independence Statement:</span> Current Financial is an independent insurance agency. We are not employees or legal representatives of UniTrust Financial Group or any government agency.
+            </p>
+            <p>
+              <span className="font-semibold text-gray-400">Earnings Disclaimer:</span> Income levels shown are for top-tier producers. Results vary based on effort and lead spend. Most agents earn significantly less.
+            </p>
+            <p>
+              <span className="font-semibold text-gray-400">Carrier Disclaimer:</span> Product availability varies by state. We represent multiple carriers; specific policy terms are governed by the issuing company.
+            </p>
+            <div className="w-12 h-[1px] bg-white/10 mx-auto my-2"></div>
+            <p className="text-[9px] md:text-[10px] text-white/20 uppercase tracking-widest mt-2">
+              &copy; {new Date().getFullYear()} Current Financial. All rights reserved.
+            </p>
+          </div>
+        </div>
+      </footer>
     </div>
   );
 }
