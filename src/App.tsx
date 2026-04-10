@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 import { Play, Target, Clock, Shield, ChevronRight, ChevronDown, CheckCircle2, ArrowRight, X } from 'lucide-react';
 import unitrustLogo from './assets/unitrust-logo.png';
+import steveImg from './assets/steve.png';
 
 interface FadeInProps {
   children: React.ReactNode;
@@ -139,7 +140,9 @@ function App() {
         <div className="flex items-center gap-3">
           <span className="text-[9px] md:text-xs uppercase tracking-widest text-gray-500 font-medium">Powered by</span>
           <div className="h-3 w-[1px] bg-white/10"></div>
-          <img src={unitrustLogo} alt="UniTrust Financial Group" className="h-7 md:h-9 drop-shadow-[0_0_10px_rgba(255,255,255,0.1)] object-contain opacity-90" />
+          <div className="overflow-hidden rounded-xl bg-white flex items-center justify-center p-1 md:p-1.5 shadow-[0_0_15px_rgba(255,255,255,0.1)]">
+            <img src={unitrustLogo} alt="UniTrust Financial Group" className="h-6 md:h-7 scale-[1.3] md:scale-[1.4] object-contain mix-blend-multiply origin-center" />
+          </div>
         </div>
       </motion.nav>
 
@@ -173,33 +176,18 @@ function App() {
           </FadeIn>
 
           {/* VSL Container */}
-          <FadeIn delay={0.3} className="w-full max-w-4xl relative group cursor-pointer mb-12 md:mb-16">
+          <FadeIn delay={0.3} className="w-full max-w-4xl relative group mb-12 md:mb-16">
              {/* Dynamic Glow */}
-            <div className="absolute -inset-2 md:-inset-4 bg-gradient-to-r from-[#C5A059]/30 to-[#1B4986]/30 rounded-[28px] md:rounded-[36px] blur-xl md:blur-2xl opacity-50 md:opacity-40 group-hover:opacity-80 transition-opacity duration-700"></div>
+            <div className="absolute -inset-2 md:-inset-4 bg-gradient-to-r from-[#C5A059]/30 to-[#1B4986]/30 rounded-[28px] md:rounded-[36px] blur-xl md:blur-2xl opacity-50 md:opacity-40 group-hover:opacity-80 transition-opacity duration-700 pointer-events-none"></div>
             
-            <div className="relative isolate w-full aspect-video rounded-2xl md:rounded-3xl bg-[#050505] overflow-hidden border border-white/10 md:border-white/20 shadow-[-10px_10px_50px_rgba(0,0,0,0.8)]">
-              {/* Poster Image */}
-              <div className="absolute inset-0 bg-gradient-to-tr from-black/80 via-[#0A0A0A]/50 to-[#1B4986]/20">
-                <motion.div 
-                  className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1542744173-8e7e53415bb0?q=80&w=2574&auto=format&fit=crop')] bg-cover bg-center opacity-40 mix-blend-overlay grayscale origin-center"
-                  whileHover={{ scale: 1.05 }}
-                  transition={{ duration: 1.5, ease: "easeOut" }}
-                ></motion.div>
-                <div className="absolute inset-0 bg-black/40 group-hover:bg-black/10 transition-colors duration-500"></div>
-              </div>
-              
-              {/* Play Button */}
-              <div className="absolute inset-0 flex flex-col items-center justify-center">
-                <motion.div 
-                  whileHover={{ scale: 1.15 }}
-                  whileTap={{ scale: 0.95 }}
-                  className="w-16 h-16 sm:w-20 sm:h-20 md:w-24 md:h-24 glass-panel rounded-full flex items-center justify-center bg-white/10 backdrop-blur-xl border border-white/20 shadow-[0_0_30px_rgba(197,160,89,0.2)] transition-all duration-300 relative group-hover:border-[#C5A059]/40 group-hover:shadow-[0_0_50px_rgba(197,160,89,0.5)]"
-                >
-                   {/* Ripple Effect base */}
-                  <div className="absolute inset-0 rounded-full border border-[#C5A059]/50 animate-ping opacity-20"></div>
-                  <Play className="w-6 h-6 sm:w-8 sm:h-8 md:w-10 md:h-10 text-[#C5A059] ml-1 sm:ml-2" fill="currentColor" />
-                </motion.div>
-              </div>
+            <div className="relative isolate w-full aspect-video rounded-2xl md:rounded-3xl bg-[#050505] overflow-hidden border border-white/10 md:border-white/20 shadow-[-10px_10px_50px_rgba(0,0,0,0.8)] z-10">
+              <iframe 
+                src="https://player.vimeo.com/video/1165399279?title=0&byline=0&portrait=0&transparent=0" 
+                className="absolute inset-0 w-full h-full object-cover" 
+                frameBorder="0" 
+                allow="autoplay; fullscreen; picture-in-picture" 
+                allowFullScreen
+              ></iframe>
             </div>
           </FadeIn>
 
@@ -217,8 +205,10 @@ function App() {
 
             <div className="mt-16 md:mt-24 text-center w-full px-4 border-t border-white/5 pt-10">
               <span className="text-[10px] md:text-xs uppercase tracking-[0.2em] text-gray-500 font-medium mb-6 block">Our Exclusive Partnership Ecosystem</span>
-              <div className="flex flex-row flex-wrap items-center justify-center opacity-70 hover:opacity-100 transition-opacity duration-700">
-                <img src={unitrustLogo} alt="UniTrust Financial Group" className="h-10 md:h-14 object-contain" />
+              <div className="flex flex-row flex-wrap items-center justify-center opacity-80 hover:opacity-100 transition-opacity duration-700">
+                <div className="overflow-hidden rounded-2xl bg-white p-2 md:p-3 shadow-[0_0_30px_rgba(255,255,255,0.05)]">
+                  <img src={unitrustLogo} alt="UniTrust Financial Group" className="h-10 md:h-14 scale-[1.3] md:scale-[1.4] object-contain mix-blend-multiply origin-center" />
+                </div>
               </div>
             </div>
           </FadeIn>
@@ -245,13 +235,14 @@ function App() {
                    <motion.div 
                      whileHover={{ scale: 1.05 }}
                      transition={{ duration: 1.2, ease: "easeOut" }}
-                     className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1556157382-97eda2d62296?auto=format&fit=crop&q=80&w=2000')] bg-cover bg-center grayscale mix-blend-luminosity opacity-70"
+                     className="absolute inset-0 bg-cover bg-center grayscale mix-blend-luminosity opacity-80"
+                     style={{ backgroundImage: `url(${steveImg})` }}
                    ></motion.div>
                    
                    <div className="absolute inset-0 bg-gradient-to-t from-[#020202] via-[#020202]/50 to-transparent"></div>
                    
                    <div className="absolute bottom-6 left-6 right-6 md:bottom-8 md:left-8 glass-panel p-4 md:p-6 rounded-2xl border border-white/10 backdrop-blur-md">
-                     <h3 className="text-2xl md:text-3xl font-heading font-bold text-white mb-1">Steven</h3>
+                     <h3 className="text-2xl md:text-3xl font-heading font-bold text-white mb-1">Steve</h3>
                      <p className="text-[#C5A059] font-medium tracking-wider uppercase text-[10px] md:text-xs">Founder, Current Financial</p>
                    </div>
                 </div>
