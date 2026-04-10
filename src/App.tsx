@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
-import { Play, Target, Clock, Shield, ChevronRight, ChevronDown, CheckCircle2, ArrowRight } from 'lucide-react';
+import { Play, Target, Clock, Shield, ChevronRight, ChevronDown, CheckCircle2, ArrowRight, X } from 'lucide-react';
 
 interface FadeInProps {
   children: React.ReactNode;
@@ -67,8 +67,22 @@ const AccordionItem = ({ question, answer, isOpen, onClick }: { question: string
 function App() {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
   const [scrolled, setScrolled] = useState(false);
+  const [isFormOpen, setIsFormOpen] = useState(false);
+  const [formState, setFormState] = useState({ state: 'idle' });
   const { scrollYProgress } = useScroll();
   const opacityGradient = useTransform(scrollYProgress, [0, 0.2], [1, 0.2]);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setFormState({ state: 'submitting' });
+    setTimeout(() => {
+      setFormState({ state: 'success' });
+      setTimeout(() => {
+        setIsFormOpen(false);
+        setFormState({ state: 'idle' });
+      }, 2000);
+    }, 1500);
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -421,6 +435,7 @@ function App() {
                     <motion.button 
                       whileHover={{ scale: 1.02 }}
                       whileTap={{ scale: 0.98 }}
+                      onClick={() => setIsFormOpen(true)}
                       className="px-8 py-4 md:px-10 md:py-4 bg-[#C5A059] text-black hover:bg-[#D4AF68] rounded-full font-bold transition-all flex items-center justify-center gap-2 mx-auto text-sm md:text-base shadow-[0_0_20px_rgba(197,160,89,0.3)] hover:shadow-[0_0_40px_rgba(197,160,89,0.5)]"
                     >
                       Start Filter Form <ArrowRight className="w-4 h-4" />
@@ -451,6 +466,112 @@ function App() {
                 <span className="relative z-10 flex items-center gap-2">Apply For The Agency <ArrowRight className="w-4 h-4" /></span>
                 <div className="absolute inset-0 bg-white/20 opacity-0 active:opacity-100 transition-opacity"></div>
               </motion.a>
+            </motion.div>
+          )}
+        </AnimatePresence>
+
+        {/* Form Modal */}
+        <AnimatePresence>
+          {isFormOpen && (
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6"
+            >
+              <div 
+                className="absolute inset-0 bg-black/80 backdrop-blur-xl"
+                onClick={() => setIsFormOpen(false)}
+              ></div>
+              
+              <motion.div
+                initial={{ scale: 0.95, y: 20, opacity: 0 }}
+                animate={{ scale: 1, y: 0, opacity: 1 }}
+                exit={{ scale: 0.95, y: 20, opacity: 0 }}
+                className="relative w-full max-w-xl glass-panel bg-[#0A0A0A]/90 border border-white/10 rounded-[32px] p-6 sm:p-10 shadow-2xl overflow-hidden"
+                onClick={(e) => e.stopPropagation()}
+              >
+                {/* Background Glow */}
+                <div className="absolute top-0 right-0 w-64 h-64 bg-[#C5A059]/10 rounded-full blur-3xl pointer-events-none -mr-32 -mt-32"></div>
+
+                <div className="flex justify-between items-center mb-8 relative z-10">
+                  <div>
+                    <h3 className="text-2xl font-bold text-white mb-2">Agency Application</h3>
+                    <p className="text-sm text-gray-400">Complete this filter to see if you're a fit.</p>
+                  </div>
+                  <button 
+                    onClick={() => setIsFormOpen(false)}
+                    className="w-10 h-10 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center text-gray-400 hover:text-white transition-colors"
+                  >
+                    <X className="w-5 h-5" />
+                  </button>
+                </div>
+
+                {formState.state === 'success' ? (
+                  <motion.div 
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    className="py-12 flex flex-col items-center text-center relative z-10"
+                  >
+                    <div className="w-20 h-20 bg-[#C5A059]/20 rounded-full flex items-center justify-center mb-6">
+                      <CheckCircle2 className="w-10 h-10 text-[#C5A059]" />
+                    </div>
+                    <h4 className="text-2xl font-bold text-white mb-3">Application Received</h4>
+                    <p className="text-gray-400 max-w-sm">We'll review your details and reach out within 24 hours if there's a mutual fit.</p>
+                  </motion.div>
+                ) : (
+                  <form onSubmit={handleSubmit} className="space-y-4 relative z-10">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div className="space-y-2">
+                        <label className="text-[10px] uppercase tracking-widest text-gray-500 font-medium ml-2">First Name</label>
+                        <input required type="text" className="w-full bg-black/50 border border-white/10 rounded-2xl px-4 py-3 text-white focus:outline-none focus:border-[#C5A059]/50 transition-colors" placeholder="John" />
+                      </div>
+                      <div className="space-y-2">
+                        <label className="text-[10px] uppercase tracking-widest text-gray-500 font-medium ml-2">Last Name</label>
+                        <input required type="text" className="w-full bg-black/50 border border-white/10 rounded-2xl px-4 py-3 text-white focus:outline-none focus:border-[#C5A059]/50 transition-colors" placeholder="Doe" />
+                      </div>
+                    </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div className="space-y-2">
+                        <label className="text-[10px] uppercase tracking-widest text-gray-500 font-medium ml-2">Email Address</label>
+                        <input required type="email" className="w-full bg-black/50 border border-white/10 rounded-2xl px-4 py-3 text-white focus:outline-none focus:border-[#C5A059]/50 transition-colors" placeholder="john@example.com" />
+                      </div>
+                      <div className="space-y-2">
+                        <label className="text-[10px] uppercase tracking-widest text-gray-500 font-medium ml-2">Phone Number</label>
+                        <input required type="tel" className="w-full bg-black/50 border border-white/10 rounded-2xl px-4 py-3 text-white focus:outline-none focus:border-[#C5A059]/50 transition-colors" placeholder="(555) 000-0000" />
+                      </div>
+                    </div>
+                    <div className="space-y-2">
+                      <label className="text-[10px] uppercase tracking-widest text-gray-500 font-medium ml-2">Are you currently licensed?</label>
+                      <select required className="w-full bg-black/50 border border-white/10 rounded-2xl px-4 py-3 text-white filter-none focus:outline-none focus:border-[#C5A059]/50 transition-colors appearance-none">
+                        <option value="" className="bg-[#0A0A0A]">Select an option</option>
+                        <option value="yes" className="bg-[#0A0A0A]">Yes, I am currently licensed</option>
+                        <option value="no" className="bg-[#0A0A0A]">No, I am not licensed yet</option>
+                        <option value="course" className="bg-[#0A0A0A]">No, but I am in a course</option>
+                      </select>
+                    </div>
+                    <div className="space-y-2">
+                      <label className="text-[10px] uppercase tracking-widest text-gray-500 font-medium ml-2">Why are you a good fit?</label>
+                      <textarea required rows={3} className="w-full bg-black/50 border border-white/10 rounded-2xl px-4 py-3 text-white focus:outline-none focus:border-[#C5A059]/50 transition-colors resize-none" placeholder="Briefly explain your background..."></textarea>
+                    </div>
+                    
+                    <button 
+                      type="submit" 
+                      disabled={formState.state === 'submitting'}
+                      className="w-full mt-6 bg-gradient-to-r from-[#C5A059] to-[#D4AF68] text-black font-bold py-4 rounded-2xl hover:opacity-90 transition-opacity disabled:opacity-50 flex items-center justify-center gap-2"
+                    >
+                      {formState.state === 'submitting' ? (
+                        <>
+                          <div className="w-5 h-5 border-2 border-black/20 border-t-black rounded-full animate-spin"></div>
+                          Submitting...
+                        </>
+                      ) : (
+                        'Submit Application'
+                      )}
+                    </button>
+                  </form>
+                )}
+              </motion.div>
             </motion.div>
           )}
         </AnimatePresence>
