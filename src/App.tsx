@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
-import { Play, Target, Clock, Shield, ChevronRight, ChevronDown, CheckCircle2, ArrowRight, X } from 'lucide-react';
+import { Target, Clock, Shield, ChevronRight, ChevronDown, CheckCircle2, ArrowRight, X } from 'lucide-react';
 import unitrustLogo from './assets/unitrust-logo.png';
 import steveImg from './assets/steve.png';
 
