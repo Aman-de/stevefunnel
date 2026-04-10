@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
 import { Play, Target, Clock, Shield, ChevronRight, ChevronDown, CheckCircle2, ArrowRight, X } from 'lucide-react';
+import unitrustLogo from './assets/unitrust-logo.png';
 
 interface FadeInProps {
   children: React.ReactNode;
@@ -138,7 +139,7 @@ function App() {
         <div className="flex items-center gap-3">
           <span className="text-[9px] md:text-xs uppercase tracking-widest text-gray-500 font-medium">Powered by</span>
           <div className="h-3 w-[1px] bg-white/10"></div>
-          <span className="text-[9px] md:text-xs uppercase tracking-widest text-[#1B4986] font-bold drop-shadow-[0_0_10px_rgba(27,73,134,0.5)]">InsuraTec</span>
+          <img src={unitrustLogo} alt="UniTrust Financial Group" className="h-7 md:h-9 drop-shadow-[0_0_10px_rgba(255,255,255,0.1)] object-contain opacity-90" />
         </div>
       </motion.nav>
 
@@ -216,9 +217,8 @@ function App() {
 
             <div className="mt-16 md:mt-24 text-center w-full px-4 border-t border-white/5 pt-10">
               <span className="text-[10px] md:text-xs uppercase tracking-[0.2em] text-gray-500 font-medium mb-6 block">Our Exclusive Partnership Ecosystem</span>
-              <div className="flex flex-row flex-wrap items-center justify-center gap-8 md:gap-16 opacity-60 grayscale hover:grayscale-0 transition-all duration-700">
-                <span className="font-heading font-extrabold text-xl md:text-2xl tracking-tighter text-white">UNITRUST<span className="font-light text-gray-400">FINANCIAL</span></span>
-                <span className="font-sans font-bold text-lg md:text-xl tracking-wide text-white">InsuraTec <span className="text-[#1B4986]">■</span></span>
+              <div className="flex flex-row flex-wrap items-center justify-center opacity-70 hover:opacity-100 transition-opacity duration-700">
+                <img src={unitrustLogo} alt="UniTrust Financial Group" className="h-10 md:h-14 object-contain" />
               </div>
             </div>
           </FadeIn>
