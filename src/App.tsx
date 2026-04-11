@@ -153,13 +153,14 @@ function App() {
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80vw] max-w-[800px] h-[300px] md:h-[500px] bg-[#C5A059]/10 blur-[100px] md:blur-[120px] rounded-full pointer-events-none"></div>
 
           <FadeIn direction="up">
-            <motion.div 
+            <motion.a 
+              href="#apply"
               whileHover={{ scale: 1.05 }}
               className="inline-flex items-center gap-2 py-1.5 px-4 rounded-full bg-white/5 border border-white/10 shadow-[0_0_20px_rgba(255,255,255,0.05)] backdrop-blur-sm tracking-wide mb-8 md:mb-10 cursor-pointer"
             >
               <div className="w-1.5 h-1.5 rounded-full bg-[#C5A059] animate-pulse"></div>
               <span className="text-[10px] md:text-xs text-gray-300 font-medium uppercase tracking-[0.1em]">The Modern Agency Standard</span>
-            </motion.div>
+            </motion.a>
           </FadeIn>
 
           <FadeIn delay={0.1}>
