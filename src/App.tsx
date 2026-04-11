@@ -128,21 +128,45 @@ function App() {
         animate={{ y: 0 }}
         transition={{ duration: 0.8, ease: "easeOut" }}
         className={`fixed w-full z-50 transition-all duration-500 border-b ${
-          scrolled ? "bg-[#0A0A0A]/85 backdrop-blur-xl border-white/10 py-3 md:py-4 shadow-2xl" : "bg-transparent border-transparent py-4 md:py-6"
-        } px-4 md:px-12 flex justify-between items-center`}
+          scrolled ? "bg-[#0A0A0A]/90 backdrop-blur-xl border-white/10 py-3 shadow-[0_10px_30px_-10px_rgba(0,0,0,0.8)]" : "bg-transparent border-transparent py-4 md:py-6"
+        } px-4 md:px-8 lg:px-12 flex justify-between items-center`}
       >
-        <div className="flex items-center gap-2">
-          <div className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#C5A059] to-[#8C6D33] flex items-center justify-center shadow-lg">
+        <div className="flex items-center gap-3 shrink-0">
+          <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#C5A059] to-[#8C6D33] flex items-center justify-center shadow-[0_0_20px_rgba(197,160,89,0.3)]">
             <span className="font-heading font-bold text-black text-sm">CF</span>
           </div>
-          <span className="font-heading font-bold tracking-tight text-white text-base md:text-lg hidden sm:block">Current Financial</span>
+          <span className="font-heading font-bold tracking-tight text-white text-lg hidden sm:block">Current Financial</span>
         </div>
-        <div className="flex items-center gap-3">
-          <span className="text-[9px] md:text-xs uppercase tracking-widest text-gray-500 font-medium">Powered by</span>
-          <div className="h-3 w-[1px] bg-white/10"></div>
-          <div className="overflow-hidden rounded-xl bg-white flex items-center justify-center p-1 md:p-1.5 shadow-[0_0_15px_rgba(255,255,255,0.1)]">
-            <img src={unitrustLogo} alt="UniTrust Financial Group" className="h-6 md:h-7 scale-[1.3] md:scale-[1.4] object-contain mix-blend-multiply origin-center" />
+        
+        <div className="flex items-center gap-3 md:gap-5">
+          {/* Contact & CTA - Hidden on very small mobile */}
+          <div className="hidden md:flex items-center gap-5">
+            <a href="tel:8005550198" className="flex items-center gap-2 text-gray-400 hover:text-[#C5A059] transition-colors text-sm font-medium group">
+              <div className="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-[#C5A059]/10 transition-colors">
+                <Phone className="w-3.5 h-3.5" />
+              </div>
+              <span className="hidden lg:block">(800) 555-0198</span>
+            </a>
+            
+            <a href="#apply" className="flex items-center justify-center py-2 px-5 rounded-full bg-white/5 border border-white/10 text-white font-medium text-sm hover:bg-[#C5A059] hover:text-black hover:border-transparent transition-all shadow-[0_0_15px_rgba(255,255,255,0.05)] hover:shadow-[0_0_25px_rgba(197,160,89,0.4)]">
+              Apply Now
+            </a>
+            
+            <div className="h-6 w-[1px] bg-gradient-to-b from-transparent via-white/15 to-transparent"></div>
           </div>
+
+          {/* Powered By Badge */}
+          <div className="flex items-center gap-2">
+            <span className="text-[8px] md:text-[9px] uppercase tracking-widest text-gray-500 font-semibold hidden md:block">Partner</span>
+            <div className="overflow-hidden rounded-lg bg-white flex items-center justify-center p-1 md:p-1.5 shadow-[0_0_15px_rgba(255,255,255,0.15)]">
+              <img src={unitrustLogo} alt="UniTrust Financial Group" className="h-4 md:h-6 scale-[1.3] md:scale-[1.4] object-contain mix-blend-multiply origin-center" />
+            </div>
+          </div>
+          
+          {/* Mobile Apply Button (Only visible on small screens) */}
+          <a href="#apply" className="md:hidden flex items-center justify-center py-2 px-4 rounded-lg bg-gradient-to-br from-[#C5A059] to-[#D4AF68] text-black font-bold text-xs shadow-[0_0_15px_rgba(197,160,89,0.2)] ml-1">
+            Apply
+          </a>
         </div>
       </motion.nav>
 
