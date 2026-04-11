@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
-import { Target, Clock, Shield, ChevronRight, ChevronDown, CheckCircle2, ArrowRight, X } from 'lucide-react';
+import { Target, Clock, Shield, ChevronRight, ChevronDown, CheckCircle2, ArrowRight, X, MapPin, Mail, Phone, Linkedin, Instagram } from 'lucide-react';
 import unitrustLogo from './assets/unitrust-logo.png';
 import steveImg from './assets/steve.png';
 
@@ -479,13 +479,13 @@ function App() {
                 initial={{ scale: 0.95, y: 20, opacity: 0 }}
                 animate={{ scale: 1, y: 0, opacity: 1 }}
                 exit={{ scale: 0.95, y: 20, opacity: 0 }}
-                className="relative w-full max-w-xl glass-panel bg-[#0A0A0A]/90 border border-white/10 rounded-[32px] p-6 sm:p-10 shadow-2xl overflow-hidden"
+                className="relative w-full max-w-xl glass-panel bg-[#0A0A0A]/90 border border-white/10 rounded-[32px] p-6 sm:p-10 shadow-2xl overflow-y-auto max-h-[90vh] custom-scrollbar"
                 onClick={(e) => e.stopPropagation()}
               >
                 {/* Background Glow */}
                 <div className="absolute top-0 right-0 w-64 h-64 bg-[#C5A059]/10 rounded-full blur-3xl pointer-events-none -mr-32 -mt-32"></div>
 
-                <div className="flex justify-between items-center mb-8 relative z-10">
+                <div className="flex justify-between items-center mb-8 relative z-10 shrink-0">
                   <div>
                     <h3 className="text-2xl font-bold text-white mb-2">Agency Application</h3>
                     <p className="text-sm text-gray-400">Complete this filter to see if you're a fit.</p>
@@ -569,23 +569,96 @@ function App() {
 
       </main>
 
-      {/* REQUIRED COMPLIANCE FOOTER */}
-      <footer className="w-full relative z-10 border-t border-white/5 bg-[#030303] py-10 md:py-16 mt-12 md:mt-0 pb-32 md:pb-16">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6">
-          <div className="text-[10px] md:text-xs text-gray-500/70 leading-relaxed font-light text-center max-w-4xl mx-auto flex flex-col gap-4">
-            <p>
-              <span className="font-semibold text-gray-400">Independence Statement:</span> Current Financial is an independent insurance agency. We are not employees or legal representatives of UniTrust Financial Group or any government agency.
-            </p>
-            <p>
-              <span className="font-semibold text-gray-400">Earnings Disclaimer:</span> Income levels shown are for top-tier producers. Results vary based on effort and lead spend. Most agents earn significantly less.
-            </p>
-            <p>
-              <span className="font-semibold text-gray-400">Carrier Disclaimer:</span> Product availability varies by state. We represent multiple carriers; specific policy terms are governed by the issuing company.
-            </p>
-            <div className="w-12 h-[1px] bg-white/10 mx-auto my-2"></div>
-            <p className="text-[9px] md:text-[10px] text-white/20 uppercase tracking-widest mt-2">
-              &copy; {new Date().getFullYear()} Current Financial. All rights reserved.
-            </p>
+      {/* PREMIUM FOOTER */}
+      <footer className="w-full relative z-10 border-t border-white/5 bg-[#030303] pt-16 md:pt-24 pb-28 md:pb-16 overflow-hidden">
+        {/* Glow effect at the bottom */}
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-3xl h-[1px] bg-gradient-to-r from-transparent via-[#C5A059]/30 to-transparent"></div>
+        <div className="absolute -bottom-10 left-1/2 -translate-x-1/2 w-[300px] h-[150px] bg-[#C5A059]/5 blur-[80px] pointer-events-none"></div>
+
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 relative z-10">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-12 lg:gap-16 mb-16">
+            {/* Brand Column */}
+            <div className="md:col-span-2">
+              <div className="flex items-center gap-2 mb-6">
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#C5A059] to-[#8C6D33] flex items-center justify-center shadow-lg">
+                  <span className="font-heading font-bold text-black text-lg">CF</span>
+                </div>
+                <span className="font-heading font-bold tracking-tight text-white text-xl">Current Financial</span>
+              </div>
+              <p className="text-gray-400 font-light text-sm md:text-base leading-relaxed mb-8 max-w-sm">
+                The modern agency standard. Build a 100% virtual, residual-income business with the industry's most advanced proprietary lead ecosystem.
+              </p>
+              <div className="flex items-center gap-4">
+                <a href="#" className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-[#C5A059] hover:border-[#C5A059]/50 hover:bg-[#C5A059]/10 transition-all">
+                  <Instagram className="w-4 h-4" />
+                </a>
+                <a href="#" className="w-10 h-10 rounded-full bg-white/5 border border-white/10 flex items-center justify-center text-gray-400 hover:text-[#C5A059] hover:border-[#C5A059]/50 hover:bg-[#C5A059]/10 transition-all">
+                  <Linkedin className="w-4 h-4" />
+                </a>
+              </div>
+            </div>
+
+            {/* Quick Links Column */}
+            <div>
+              <h4 className="text-white font-heading font-semibold mb-6">Partnership</h4>
+              <ul className="space-y-4">
+                <li><a href="#apply" className="text-gray-400 hover:text-white transition-colors text-sm font-light flex items-center gap-2"><div className="w-1 h-1 rounded-full bg-[#C5A059]"></div> Apply Now</a></li>
+                <li><a href="#" className="text-gray-400 hover:text-white transition-colors text-sm font-light">The System</a></li>
+                <li><a href="#" className="text-gray-400 hover:text-white transition-colors text-sm font-light">Mentorship</a></li>
+                <li><a href="#" className="text-gray-400 hover:text-white transition-colors text-sm font-light">Compensation</a></li>
+              </ul>
+            </div>
+
+            {/* Contact Column */}
+            <div>
+              <h4 className="text-white font-heading font-semibold mb-6">Contact</h4>
+              <ul className="space-y-4">
+                <li className="flex items-start gap-3">
+                  <Mail className="w-4 h-4 text-[#C5A059] mt-0.5" />
+                  <span className="text-gray-400 text-sm font-light">support@currentfinancial.com</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <Phone className="w-4 h-4 text-[#C5A059] mt-0.5" />
+                  <span className="text-gray-400 text-sm font-light">800.555.0198</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <MapPin className="w-4 h-4 text-[#C5A059] mt-0.5 shrink-0" />
+                  <span className="text-gray-400 text-sm font-light">100% Virtual Organization<br/>Headquartered in Dallas, TX</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-white/10 to-transparent mb-10"></div>
+
+          {/* Compliance & Legal */}
+          <div className="bg-[#0A0A0A]/30 rounded-2xl md:rounded-[32px] p-6 md:p-10 border border-white/5 relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-bl from-white/5 to-transparent opacity-50 pointer-events-none"></div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-10 text-[10px] md:text-xs text-gray-500 leading-relaxed font-light mb-8">
+              <div>
+                <h5 className="font-semibold text-gray-300 uppercase tracking-widest text-[9px] mb-2">Independence Statement</h5>
+                <p>Current Financial is an independent insurance agency. We are not employees or legal representatives of UniTrust Financial Group, any parent company, or any government agency. All agents operate as fully independent 1099 contractors.</p>
+              </div>
+              <div>
+                <h5 className="font-semibold text-gray-300 uppercase tracking-widest text-[9px] mb-2">Earnings Disclaimer</h5>
+                <p>Income levels shown and stated represent elite, top-tier producers. Individual results vary significantly based on work ethic, lead investment, background, and adherence to the system. Most agents earn considerably less.</p>
+              </div>
+              <div>
+                <h5 className="font-semibold text-gray-300 uppercase tracking-widest text-[9px] mb-2">Carrier Disclaimer</h5>
+                <p>Product availability varies by state. We represent a multitude of A-rated carriers to provide non-captive coverage. Specific policy terms, payouts, and underwriting decisions are strictly governed by the issuing life insurance company.</p>
+              </div>
+            </div>
+            
+            <div className="flex flex-col md:flex-row items-center justify-between pt-6 border-t border-white/5 gap-4">
+              <div className="flex items-center gap-3">
+                <span className="text-[9px] md:text-[10px] uppercase tracking-widest text-gray-600 font-medium">Powered by</span>
+                <img src={unitrustLogo} alt="UniTrust Financial Group" className="h-5 mix-blend-multiply brightness-75 contrast-125" />
+              </div>
+              <p className="text-[10px] md:text-xs text-gray-600 uppercase tracking-widest">
+                &copy; {new Date().getFullYear()} Current Financial. All rights reserved.
+              </p>
+            </div>
           </div>
         </div>
       </footer>
