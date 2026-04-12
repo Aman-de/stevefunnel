@@ -173,14 +173,14 @@ function App() {
       <main className="relative z-10 flex flex-col items-center">
         
         {/* SECTION 2: THE HERO & VSL */}
-        <section className="w-full flex flex-col items-center px-4 pt-32 pb-16 md:pt-48 md:pb-24 text-center max-w-5xl mx-auto relative">
+        <section className="w-full flex flex-col items-center px-4 pt-24 pb-16 md:pt-32 md:pb-24 text-center max-w-5xl mx-auto relative">
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80vw] max-w-[800px] h-[300px] md:h-[500px] bg-[#C5A059]/10 blur-[100px] md:blur-[120px] rounded-full pointer-events-none"></div>
 
           <FadeIn direction="up">
             <motion.a 
               href="#apply"
               whileHover={{ scale: 1.05 }}
-              className="inline-flex items-center gap-2 py-1.5 px-4 rounded-full bg-white/5 border border-white/10 shadow-[0_0_20px_rgba(255,255,255,0.05)] backdrop-blur-sm tracking-wide mb-8 md:mb-10 cursor-pointer"
+              className="inline-flex items-center gap-2 py-1.5 px-4 rounded-full bg-white/5 border border-white/10 shadow-[0_0_20px_rgba(255,255,255,0.05)] backdrop-blur-sm tracking-wide mb-6 md:mb-8 cursor-pointer"
             >
               <div className="w-1.5 h-1.5 rounded-full bg-[#C5A059] animate-pulse"></div>
               <span className="text-[10px] md:text-xs text-gray-300 font-medium uppercase tracking-[0.1em]">The Modern Agency Standard</span>
@@ -188,20 +188,20 @@ function App() {
           </FadeIn>
 
           <FadeIn delay={0.1}>
-            <h1 className="text-[42px] leading-[1.05] md:text-6xl lg:text-[80px] font-bold tracking-tight text-white mb-6 md:mb-8 px-2">
+            <h1 className="text-[42px] leading-[1.05] md:text-6xl lg:text-[80px] font-bold tracking-tight text-white mb-4 md:mb-6 px-2">
               Stop Starting at Zero.<br/>
               Build a <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#D4AF68] to-[#C5A059]">100% Virtual</span>,<br className="hidden md:block" /> <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#D4AF68] to-[#C5A059]">Residual-Income</span> Business.
             </h1>
           </FadeIn>
           
           <FadeIn delay={0.2}>
-            <p className="text-[15px] md:text-xl text-gray-400 max-w-2xl mx-auto mb-10 md:mb-14 font-light leading-relaxed px-4 md:px-0">
+            <p className="text-[15px] md:text-xl text-gray-400 max-w-2xl mx-auto mb-8 md:mb-10 font-light leading-relaxed px-4 md:px-0">
               Plug into the industry’s most advanced proprietary lead ecosystem. No cold calling. No recycled leads. Watch the corporate overview below.
             </p>
           </FadeIn>
 
           {/* VSL Container */}
-          <FadeIn delay={0.3} className="w-full max-w-4xl relative group mb-12 md:mb-16">
+          <FadeIn delay={0.3} className="w-full max-w-4xl relative group mb-10 md:mb-12">
              {/* Dynamic Glow */}
             <div className="absolute -inset-2 md:-inset-4 bg-gradient-to-r from-[#C5A059]/30 to-[#1B4986]/30 rounded-[28px] md:rounded-[36px] blur-xl md:blur-2xl opacity-50 md:opacity-40 group-hover:opacity-80 transition-opacity duration-700 pointer-events-none"></div>
             
