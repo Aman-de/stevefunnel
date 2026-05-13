@@ -631,6 +631,8 @@ function App() {
                 <li><a href="#" className="text-gray-400 hover:text-white transition-colors text-sm font-light">The System</a></li>
                 <li><a href="#" className="text-gray-400 hover:text-white transition-colors text-sm font-light">Mentorship</a></li>
                 <li><a href="#" className="text-gray-400 hover:text-white transition-colors text-sm font-light">Compensation</a></li>
+                <li><a href="/sms-terms" className="text-gray-400 hover:text-white transition-colors text-sm font-light">SMS Terms</a></li>
+                <li><a href="/privacy-policy" className="text-gray-400 hover:text-white transition-colors text-sm font-light">Privacy Policy</a></li>
               </ul>
             </div>
 
