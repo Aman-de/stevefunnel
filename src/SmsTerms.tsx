@@ -1,7 +1,10 @@
-import { ArrowRight } from 'lucide-react';
+import { useState } from 'react';
+import { ArrowRight, Check } from 'lucide-react';
 import unitrustLogo from './assets/unitrust-logo.png';
 
 export default function SmsTerms() {
+  const [isOptedOut, setIsOptedOut] = useState(false);
+
   return (
     <div className="min-h-screen bg-[#0A0A0A] text-gray-100 font-sans selection:bg-[#C5A059]/30 selection:text-white flex flex-col">
       <nav className="w-full z-50 bg-[#0A0A0A]/90 backdrop-blur-xl border-b border-white/10 py-4 md:py-6 px-4 md:px-8 lg:px-12 flex justify-between items-center">
@@ -44,6 +47,29 @@ export default function SmsTerms() {
               <p className="text-sm text-gray-400 mt-2">
                 Message and data rates may apply.
               </p>
+
+              <div className="mt-8 pt-6 border-t border-white/10 flex flex-col items-center text-left md:text-center">
+                <label className="flex items-start md:items-center gap-3 cursor-pointer group">
+                  <div className="relative flex items-center justify-center mt-1 md:mt-0">
+                    <input 
+                      type="checkbox" 
+                      className="sr-only" 
+                      checked={isOptedOut}
+                      onChange={(e) => setIsOptedOut(e.target.checked)}
+                    />
+                    <div className={`w-5 h-5 rounded border flex items-center justify-center transition-all duration-200 ${
+                      isOptedOut 
+                        ? 'bg-[#C5A059] border-[#C5A059]' 
+                        : 'bg-black/50 border-white/30 group-hover:border-[#C5A059]/70'
+                    }`}>
+                      {isOptedOut && <Check className="w-3.5 h-3.5 text-black" strokeWidth={4} />}
+                    </div>
+                  </div>
+                  <span className="text-sm text-gray-300 group-hover:text-white transition-colors">
+                    I wish to opt out of receiving SMS messages from Current Financial.
+                  </span>
+                </label>
+              </div>
             </div>
           </div>
         </div>
