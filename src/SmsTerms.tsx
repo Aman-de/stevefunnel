@@ -3,7 +3,7 @@ import { ArrowRight, Check } from 'lucide-react';
 import unitrustLogo from './assets/unitrust-logo.png';
 
 export default function SmsTerms() {
-  const [isOptedOut, setIsOptedOut] = useState(false);
+  const [isConsented, setIsConsented] = useState(false);
 
   return (
     <div className="min-h-screen bg-[#0A0A0A] text-gray-100 font-sans selection:bg-[#C5A059]/30 selection:text-white flex flex-col">
@@ -48,25 +48,25 @@ export default function SmsTerms() {
                 Message and data rates may apply.
               </p>
 
-              <div className="mt-8 pt-6 border-t border-white/10 flex flex-col items-center text-left md:text-center">
-                <label className="flex items-start md:items-center gap-3 cursor-pointer group">
-                  <div className="relative flex items-center justify-center mt-1 md:mt-0">
+              <div className="mt-8 pt-6 border-t border-white/10 flex flex-col items-center text-left">
+                <label className="flex items-start gap-4 cursor-pointer group p-3 md:p-4 rounded-xl border border-transparent hover:border-white/5 hover:bg-white/[0.02] transition-all active:scale-[0.98]">
+                  <div className="relative flex items-center justify-center mt-0.5 shrink-0">
                     <input 
                       type="checkbox" 
                       className="sr-only" 
-                      checked={isOptedOut}
-                      onChange={(e) => setIsOptedOut(e.target.checked)}
+                      checked={isConsented}
+                      onChange={(e) => setIsConsented(e.target.checked)}
                     />
-                    <div className={`w-5 h-5 rounded border flex items-center justify-center transition-all duration-200 ${
-                      isOptedOut 
-                        ? 'bg-[#C5A059] border-[#C5A059]' 
-                        : 'bg-black/50 border-white/30 group-hover:border-[#C5A059]/70'
+                    <div className={`w-6 h-6 rounded-md border flex items-center justify-center transition-all duration-300 ease-out ${
+                      isConsented 
+                        ? 'bg-[#C5A059] border-[#C5A059] shadow-[0_0_15px_rgba(197,160,89,0.4)] scale-105' 
+                        : 'bg-black/50 border-white/30 group-hover:border-[#C5A059]/70 scale-100'
                     }`}>
-                      {isOptedOut && <Check className="w-3.5 h-3.5 text-black" strokeWidth={4} />}
+                      <Check className={`w-4 h-4 text-black transition-all duration-300 ${isConsented ? 'opacity-100 scale-100' : 'opacity-0 scale-50'}`} strokeWidth={3.5} />
                     </div>
                   </div>
-                  <span className="text-sm text-gray-300 group-hover:text-white transition-colors">
-                    I wish to opt out of receiving SMS messages from Current Financial.
+                  <span className="text-sm text-gray-300 group-hover:text-white transition-colors leading-relaxed">
+                    I consent to receive SMS messages from Current Financial Group LLC about career opportunities. Message and data rates may apply. Reply STOP to unsubscribe.
                   </span>
                 </label>
               </div>
