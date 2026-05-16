@@ -49,26 +49,39 @@ export default function SmsTerms() {
               </p>
 
               <div className="mt-8 pt-6 border-t border-white/10 flex flex-col items-center text-left">
-                <label className="flex items-start gap-4 cursor-pointer group p-3 md:p-4 rounded-xl border border-transparent hover:border-white/5 hover:bg-white/[0.02] transition-all active:scale-[0.98]">
-                  <div className="relative flex items-center justify-center mt-0.5 shrink-0">
-                    <input 
-                      type="checkbox" 
-                      className="sr-only" 
-                      checked={isConsented}
-                      onChange={(e) => setIsConsented(e.target.checked)}
-                    />
-                    <div className={`w-6 h-6 rounded-md border flex items-center justify-center transition-all duration-300 ease-out ${
-                      isConsented 
-                        ? 'bg-[#C5A059] border-[#C5A059] shadow-[0_0_15px_rgba(197,160,89,0.4)] scale-105' 
-                        : 'bg-black/50 border-white/30 group-hover:border-[#C5A059]/70 scale-100'
-                    }`}>
-                      <Check className={`w-4 h-4 text-black transition-all duration-300 ${isConsented ? 'opacity-100 scale-100' : 'opacity-0 scale-50'}`} strokeWidth={3.5} />
+                <div className="w-full relative">
+                  <label className={`flex items-start gap-4 cursor-pointer group p-3 md:p-4 rounded-xl border transition-all duration-300 active:scale-[0.98] ${isConsented ? 'border-[#C5A059]/20 bg-[#C5A059]/[0.02]' : 'border-transparent hover:border-white/5 hover:bg-white/[0.02]'}`}>
+                    <div className="relative flex items-center justify-center mt-0.5 shrink-0">
+                      <input 
+                        type="checkbox" 
+                        className="sr-only" 
+                        checked={isConsented}
+                        onChange={(e) => setIsConsented(e.target.checked)}
+                      />
+                      <div className={`w-6 h-6 rounded-md border flex items-center justify-center transition-all duration-300 ease-out ${
+                        isConsented 
+                          ? 'bg-[#C5A059] border-[#C5A059] shadow-[0_0_15px_rgba(197,160,89,0.4)] scale-105' 
+                          : 'bg-black/50 border-white/30 group-hover:border-[#C5A059]/70 scale-100'
+                      }`}>
+                        <Check className={`w-4 h-4 text-black transition-all duration-300 ${isConsented ? 'opacity-100 scale-100' : 'opacity-0 scale-50'}`} strokeWidth={3.5} />
+                      </div>
+                    </div>
+                    <span className={`text-sm transition-colors leading-relaxed ${isConsented ? 'text-white' : 'text-gray-300 group-hover:text-white'}`}>
+                      I consent to receive SMS messages from Current Financial Group LLC about career opportunities. Message and data rates may apply. Reply STOP to unsubscribe.
+                    </span>
+                  </label>
+                  
+                  <div className={`overflow-hidden transition-all duration-500 ease-out ${isConsented ? 'max-h-24 opacity-100 mt-3' : 'max-h-0 opacity-0 mt-0'}`}>
+                    <div className="px-4 py-3 mx-2 rounded-lg bg-[#C5A059]/10 border border-[#C5A059]/20 flex items-center gap-3 transform transition-transform duration-500">
+                      <div className="w-8 h-8 shrink-0 rounded-full bg-[#C5A059]/20 flex items-center justify-center">
+                        <Check className="w-4 h-4 text-[#C5A059]" strokeWidth={3} />
+                      </div>
+                      <p className="text-sm text-[#E2C792] font-medium leading-tight">
+                        Great! We will send you a text message to confirm your enrollment here shortly.
+                      </p>
                     </div>
                   </div>
-                  <span className="text-sm text-gray-300 group-hover:text-white transition-colors leading-relaxed">
-                    I consent to receive SMS messages from Current Financial Group LLC about career opportunities. Message and data rates may apply. Reply STOP to unsubscribe.
-                  </span>
-                </label>
+                </div>
               </div>
             </div>
           </div>
