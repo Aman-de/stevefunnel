@@ -15,7 +15,7 @@ export default function SmsTerms() {
           <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#C5A059] to-[#8C6D33] flex items-center justify-center shadow-[0_0_20px_rgba(197,160,89,0.3)]">
             <span className="font-heading font-bold text-black text-sm">CF</span>
           </div>
-          <span className="font-heading font-bold tracking-tight text-white text-lg group-hover:text-[#C5A059] transition-colors">Current Financial</span>
+          <span className="font-heading font-bold tracking-tight text-white text-lg group-hover:text-[#C5A059] transition-colors">Current Financial Group</span>
         </a>
         <a href="/" className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors text-sm font-medium">
           <ArrowRight className="w-4 h-4 rotate-180" />
@@ -27,6 +27,9 @@ export default function SmsTerms() {
         <div className="mb-10 flex flex-col items-center">
           <span className="text-[#C5A059] text-[10px] md:text-xs font-bold uppercase tracking-widest mb-3 block">Legal & Compliance</span>
           <h1 className="text-3xl md:text-5xl font-bold tracking-tight text-white mb-6">SMS Terms & Conditions</h1>
+          <p className="text-base text-gray-400 max-w-xl text-center mb-6">
+            Current Financial Group sends SMS messages related to career opportunities in the life insurance industry.
+          </p>
           <div className="w-16 h-1 bg-gradient-to-r from-[#C5A059] to-transparent rounded-full mx-auto"></div>
         </div>
 
@@ -34,22 +37,15 @@ export default function SmsTerms() {
           <div className="absolute top-0 right-0 w-64 h-64 bg-[#C5A059]/5 blur-3xl pointer-events-none rounded-full -mr-32 -mt-32"></div>
           
           <div className="relative z-10 text-gray-300 font-light leading-relaxed space-y-8">
-            <p className="text-lg md:text-xl text-white font-medium">
-              Current Financial Group may send SMS messages to individuals who have expressed interest in career opportunities.
-            </p>
-            
-            <div className="p-6 rounded-2xl bg-white/5 border border-white/10 text-center">
-              <p className="text-base md:text-lg mb-3">
-                Message frequency varies.
+            <div className="p-6 rounded-2xl bg-white/5 border border-white/10 text-center mt-2">
+              <p className="text-sm md:text-base text-gray-300 mb-4 leading-relaxed">
+                <strong>Current Financial Group</strong> sends SMS messages related to career opportunities in the life insurance industry. Message frequency varies. Message and data rates may apply.
               </p>
-              <div className="inline-block px-4 py-2 bg-[#C5A059]/10 border border-[#C5A059]/30 rounded-lg mb-3">
-                <p className="text-base md:text-lg text-[#C5A059] font-medium">
-                  Reply <strong className="text-white">STOP</strong> to unsubscribe.
+              <div className="inline-block px-4 py-2 bg-[#C5A059]/10 border border-[#C5A059]/30 rounded-lg">
+                <p className="text-sm md:text-base text-[#C5A059] font-medium">
+                  Reply <strong className="text-white">STOP</strong> to opt out. Reply <strong className="text-white">HELP</strong> for help.
                 </p>
               </div>
-              <p className="text-sm text-gray-400 mt-2">
-                Message and data rates may apply.
-              </p>
 
               <div className="mt-8 pt-6 border-t border-white/10 flex flex-col items-center text-left">
                 <div className="w-full space-y-4 mb-6">
@@ -120,6 +116,12 @@ export default function SmsTerms() {
                       </p>
                     </div>
                   </div>
+                </div>
+                
+                <div className="w-full mt-8 pt-6 border-t border-white/10 text-center">
+                  <p className="text-sm text-gray-400">
+                    For support contact us at <a href="mailto:steven@currentfinancialgroup.com" className="text-white hover:text-[#C5A059] transition-colors underline underline-offset-2">steven@currentfinancialgroup.com</a>
+                  </p>
                 </div>
               </div>
             </div>
