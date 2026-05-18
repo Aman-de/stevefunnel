@@ -4,6 +4,9 @@ import unitrustLogo from './assets/unitrust-logo.png';
 
 export default function SmsTerms() {
   const [isConsented, setIsConsented] = useState(false);
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
 
   return (
     <div className="min-h-screen bg-[#0A0A0A] text-gray-100 font-sans selection:bg-[#C5A059]/30 selection:text-white flex flex-col">
@@ -49,6 +52,42 @@ export default function SmsTerms() {
               </p>
 
               <div className="mt-8 pt-6 border-t border-white/10 flex flex-col items-center text-left">
+                <div className="w-full space-y-4 mb-6">
+                  <div>
+                    <label htmlFor="name" className="block text-sm font-medium text-gray-400 mb-1 ml-1">Full Name</label>
+                    <input 
+                      type="text" 
+                      id="name"
+                      value={name}
+                      onChange={(e) => setName(e.target.value)}
+                      className="w-full bg-black/20 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:border-[#C5A059]/50 focus:ring-1 focus:ring-[#C5A059]/50 transition-all"
+                      placeholder="Jane Doe"
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="phone" className="block text-sm font-medium text-gray-400 mb-1 ml-1">Phone Number</label>
+                    <input 
+                      type="tel" 
+                      id="phone"
+                      value={phone}
+                      onChange={(e) => setPhone(e.target.value)}
+                      className="w-full bg-black/20 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:border-[#C5A059]/50 focus:ring-1 focus:ring-[#C5A059]/50 transition-all"
+                      placeholder="(555) 000-0000"
+                    />
+                  </div>
+                  <div>
+                    <label htmlFor="email" className="block text-sm font-medium text-gray-400 mb-1 ml-1">Email Address</label>
+                    <input 
+                      type="email" 
+                      id="email"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
+                      className="w-full bg-black/20 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:border-[#C5A059]/50 focus:ring-1 focus:ring-[#C5A059]/50 transition-all"
+                      placeholder="jane@example.com"
+                    />
+                  </div>
+                </div>
+
                 <div className="w-full relative">
                   <label className={`flex items-start gap-4 cursor-pointer group p-3 md:p-4 rounded-xl border transition-all duration-300 active:scale-[0.98] ${isConsented ? 'border-[#C5A059]/20 bg-[#C5A059]/[0.02]' : 'border-transparent hover:border-white/5 hover:bg-white/[0.02]'}`}>
                     <div className="relative flex items-center justify-center mt-0.5 shrink-0">
