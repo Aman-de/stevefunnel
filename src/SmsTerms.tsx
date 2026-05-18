@@ -134,8 +134,8 @@ export default function SmsTerms() {
               <span className="text-[9px] md:text-[10px] uppercase tracking-widest text-gray-600 font-medium">Powered by</span>
               <img src={unitrustLogo} alt="UniTrust Financial Group" className="h-4 mix-blend-multiply brightness-75 contrast-125" />
             </div>
-            <p className="text-[10px] md:text-xs text-gray-600 uppercase tracking-widest">
-              &copy; {new Date().getFullYear()} Current Financial. All rights reserved.
+            <p className="text-[10px] md:text-xs text-gray-500 hover:text-gray-400 transition-colors uppercase tracking-widest">
+              &copy; {new Date().getFullYear()} Current Financial Group. All rights reserved.
             </p>
           </div>
         </div>
