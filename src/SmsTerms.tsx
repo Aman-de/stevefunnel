@@ -106,7 +106,7 @@ export default function SmsTerms() {
                       </div>
                     </div>
                     <span className={`text-sm transition-colors leading-relaxed ${isConsented ? 'text-white' : 'text-gray-300 group-hover:text-white'}`}>
-                      I consent to receive SMS messages from Current Financial Group LLC about career opportunities. Message and data rates may apply. Reply STOP to unsubscribe.
+                      I agree to receive SMS messages from Current Financial Group about career opportunities. Message frequency varies. Message and data rates may apply. Reply STOP to opt out. Reply HELP for help.
                     </span>
                   </label>
                   
