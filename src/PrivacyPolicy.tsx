@@ -9,7 +9,7 @@ export default function PrivacyPolicy() {
           <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#C5A059] to-[#8C6D33] flex items-center justify-center shadow-[0_0_20px_rgba(197,160,89,0.3)]">
             <span className="font-heading font-bold text-black text-sm">CF</span>
           </div>
-          <span className="font-heading font-bold tracking-tight text-white text-lg group-hover:text-[#C5A059] transition-colors">Current Financial</span>
+          <span className="font-heading font-bold tracking-tight text-white text-lg group-hover:text-[#C5A059] transition-colors">Current Financial Group</span>
         </a>
         <a href="/" className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors text-sm font-medium">
           <ArrowRight className="w-4 h-4 rotate-180" />
@@ -172,7 +172,7 @@ export default function PrivacyPolicy() {
               <img src={unitrustLogo} alt="UniTrust Financial Group" className="h-4 mix-blend-multiply brightness-75 contrast-125" />
             </div>
             <p className="text-[10px] md:text-xs text-gray-600 uppercase tracking-widest">
-              &copy; {new Date().getFullYear()} Current Financial. All rights reserved.
+              &copy; {new Date().getFullYear()} Current Financial Group. All rights reserved.
             </p>
           </div>
         </div>

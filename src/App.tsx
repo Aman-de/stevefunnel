@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
-import { Target, Clock, Shield, ChevronRight, ChevronDown, CheckCircle2, ArrowRight, X, MapPin, Mail, Phone } from 'lucide-react';
+import { Target, Clock, Shield, ChevronDown, CheckCircle2, ArrowRight, MapPin, Mail, Phone, User, MessageSquare } from 'lucide-react';
 import unitrustLogo from './assets/unitrust-logo.png';
 import steveImg from './assets/steve.png';
 
@@ -69,7 +69,6 @@ const AccordionItem = ({ question, answer, isOpen, onClick }: { question: string
 function App() {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
   const [scrolled, setScrolled] = useState(false);
-  const [isFormOpen, setIsFormOpen] = useState(false);
   const [formState, setFormState] = useState({ state: 'idle' });
   const { scrollYProgress } = useScroll();
   const opacityGradient = useTransform(scrollYProgress, [0, 0.2], [1, 0.2]);
@@ -80,10 +79,23 @@ function App() {
     setTimeout(() => {
       setFormState({ state: 'success' });
       setTimeout(() => {
-        setIsFormOpen(false);
         setFormState({ state: 'idle' });
-      }, 2000);
+      }, 4000);
     }, 1500);
+  };
+
+  const scrollToApplication = (e?: React.MouseEvent) => {
+    if (e) e.preventDefault();
+    const element = document.getElementById('apply');
+    if (element) {
+      const headerOffset = window.innerWidth < 768 ? 70 : 90;
+      const elementPosition = element.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
   };
 
   useEffect(() => {
@@ -135,7 +147,7 @@ function App() {
           <div className="w-9 h-9 rounded-xl bg-gradient-to-br from-[#C5A059] to-[#8C6D33] flex items-center justify-center shadow-[0_0_20px_rgba(197,160,89,0.3)]">
             <span className="font-heading font-bold text-black text-sm">CF</span>
           </div>
-          <span className="font-heading font-bold tracking-tight text-white text-lg hidden sm:block">Current Financial</span>
+          <span className="font-heading font-bold tracking-tight text-white text-lg hidden sm:block">Current Financial Group</span>
         </div>
         
         <div className="flex items-center gap-3 md:gap-5">
@@ -148,23 +160,21 @@ function App() {
               <span className="hidden lg:block">(800) 555-0198</span>
             </a>
             
-            <a href="#apply" className="flex items-center justify-center py-2 px-5 rounded-full bg-white/5 border border-white/10 text-white font-medium text-sm hover:bg-[#C5A059] hover:text-black hover:border-transparent transition-all shadow-[0_0_15px_rgba(255,255,255,0.05)] hover:shadow-[0_0_25px_rgba(197,160,89,0.4)]">
+            <a 
+              href="#apply" 
+              onClick={scrollToApplication}
+              className="flex items-center justify-center py-2 px-5 rounded-full bg-white/5 border border-white/10 text-white font-medium text-sm hover:bg-[#C5A059] hover:text-black hover:border-transparent transition-all shadow-[0_0_15px_rgba(255,255,255,0.05)] hover:shadow-[0_0_25px_rgba(197,160,89,0.4)]"
+            >
               Apply Now
             </a>
-            
-            <div className="h-6 w-[1px] bg-gradient-to-b from-transparent via-white/15 to-transparent"></div>
-          </div>
-
-          {/* Powered By Badge */}
-          <div className="flex items-center gap-2">
-            <span className="text-[8px] md:text-[9px] uppercase tracking-widest text-gray-500 font-semibold hidden md:block">Partner</span>
-            <div className="overflow-hidden rounded-lg bg-white flex items-center justify-center p-1 md:p-1.5 shadow-[0_0_15px_rgba(255,255,255,0.15)]">
-              <img src={unitrustLogo} alt="UniTrust Financial Group" className="h-4 md:h-6 scale-[1.3] md:scale-[1.4] object-contain mix-blend-multiply origin-center" />
-            </div>
           </div>
           
           {/* Mobile Apply Button (Only visible on small screens) */}
-          <a href="#apply" className="md:hidden flex items-center justify-center py-2 px-4 rounded-lg bg-gradient-to-br from-[#C5A059] to-[#D4AF68] text-black font-bold text-xs shadow-[0_0_15px_rgba(197,160,89,0.2)] ml-1">
+          <a 
+            href="#apply" 
+            onClick={scrollToApplication}
+            className="md:hidden flex items-center justify-center py-2 px-4 rounded-lg bg-gradient-to-br from-[#C5A059] to-[#D4AF68] text-black font-bold text-xs shadow-[0_0_15px_rgba(197,160,89,0.2)] ml-1"
+          >
             Apply
           </a>
         </div>
@@ -179,6 +189,7 @@ function App() {
           <FadeIn direction="up">
             <motion.a 
               href="#apply"
+              onClick={scrollToApplication}
               whileHover={{ scale: 1.05 }}
               className="inline-flex items-center gap-2 py-1.5 px-4 rounded-full bg-white/5 border border-white/10 shadow-[0_0_20px_rgba(255,255,255,0.05)] backdrop-blur-sm tracking-wide mb-6 md:mb-8 cursor-pointer"
             >
@@ -188,7 +199,7 @@ function App() {
           </FadeIn>
 
           <FadeIn delay={0.1}>
-            <h1 className="text-[42px] leading-[1.05] md:text-6xl lg:text-[80px] font-bold tracking-tight text-white mb-4 md:mb-6 px-2">
+            <h1 className="text-3xl min-[375px]:text-[36px] min-[414px]:text-[42px] sm:text-5xl md:text-6xl lg:text-[80px] font-bold tracking-tight text-white mb-4 md:mb-6 px-2 leading-[1.1] md:leading-[1.05]">
               Stop Starting at Zero.<br/>
               Build a <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#D4AF68] to-[#C5A059]">100% Virtual</span>,<br className="hidden md:block" /> <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#D4AF68] to-[#C5A059]">Residual-Income</span> Business.
             </h1>
@@ -203,7 +214,7 @@ function App() {
           {/* VSL Container */}
           <FadeIn delay={0.3} className="w-full max-w-4xl relative group mb-10 md:mb-12">
              {/* Dynamic Glow */}
-            <div className="absolute -inset-2 md:-inset-4 bg-gradient-to-r from-[#C5A059]/30 to-[#1B4986]/30 rounded-[28px] md:rounded-[36px] blur-xl md:blur-2xl opacity-50 md:opacity-40 group-hover:opacity-80 transition-opacity duration-700 pointer-events-none"></div>
+            <div className="absolute -inset-1.5 md:-inset-4 bg-gradient-to-r from-[#C5A059]/20 to-[#1B4986]/20 rounded-2xl md:rounded-[36px] blur-lg md:blur-2xl opacity-50 md:opacity-40 group-hover:opacity-80 transition-opacity duration-700 pointer-events-none"></div>
             
             <div className="relative isolate w-full aspect-video rounded-2xl md:rounded-3xl bg-[#050505] overflow-hidden border border-white/10 md:border-white/20 shadow-[-10px_10px_50px_rgba(0,0,0,0.8)] z-10">
               <iframe 
@@ -220,6 +231,7 @@ function App() {
           <FadeIn delay={0.4} className="w-full flex flex-col items-center relative z-20">
              <motion.a 
               href="#apply"
+              onClick={scrollToApplication}
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
               className="inline-flex items-center justify-center gap-3 bg-gradient-to-br from-[#C5A059] via-[#D4AF68] to-[#AA8542] text-black px-8 py-4 md:px-12 md:py-5 rounded-full font-bold text-base md:text-lg transition-all shadow-[0_0_30px_rgba(197,160,89,0.25)] hover:shadow-[0_0_40px_rgba(197,160,89,0.4)] w-full sm:w-auto overflow-hidden group relative"
@@ -231,8 +243,8 @@ function App() {
             <div className="mt-16 md:mt-24 text-center w-full px-4 border-t border-white/5 pt-10">
               <span className="text-[10px] md:text-xs uppercase tracking-[0.2em] text-gray-500 font-medium mb-6 block">Our Exclusive Partnership Ecosystem</span>
               <div className="flex flex-row flex-wrap items-center justify-center opacity-80 hover:opacity-100 transition-opacity duration-700">
-                <div className="overflow-hidden rounded-2xl bg-white p-2 md:p-3 shadow-[0_0_30px_rgba(255,255,255,0.05)]">
-                  <img src={unitrustLogo} alt="UniTrust Financial Group" className="h-10 md:h-14 scale-[1.3] md:scale-[1.4] object-contain mix-blend-multiply origin-center" />
+                <div className="overflow-hidden rounded-xl bg-white/95 px-5 py-2.5 shadow-[0_4px_20px_rgba(255,255,255,0.08)] hover:scale-[1.02] hover:shadow-[0_4px_25px_rgba(197,160,89,0.25)] border border-white/10 transition-all duration-300">
+                  <img src={unitrustLogo} alt="UniTrust Financial Group" className="h-9 md:h-12 scale-[1.3] md:scale-[1.4] object-contain mix-blend-multiply origin-center" />
                 </div>
               </div>
             </div>
@@ -255,7 +267,7 @@ function App() {
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
               
               {/* Image Area */}
-              <FadeIn className="lg:col-span-5 relative h-[400px] sm:h-[450px] lg:h-[650px] rounded-[24px] md:rounded-[40px] overflow-hidden p-1 group bg-gradient-to-b from-white/10 to-transparent" direction="right">
+              <FadeIn className="lg:col-span-5 relative h-[320px] min-[375px]:h-[380px] sm:h-[450px] lg:h-[650px] rounded-[24px] md:rounded-[40px] overflow-hidden p-1 group bg-gradient-to-b from-white/10 to-transparent" direction="right">
                 <div className="w-full h-full rounded-[20px] md:rounded-[36px] bg-[#0A0A0A] overflow-hidden relative isolate">
                    <motion.div 
                      whileHover={{ scale: 1.05 }}
@@ -266,9 +278,9 @@ function App() {
                    
                    <div className="absolute inset-0 bg-gradient-to-t from-[#020202] via-[#020202]/50 to-transparent"></div>
                    
-                   <div className="absolute bottom-6 left-6 right-6 md:bottom-8 md:left-8 glass-panel p-4 md:p-6 rounded-2xl border border-white/10 backdrop-blur-md">
-                     <h3 className="text-2xl md:text-3xl font-heading font-bold text-white mb-1">Steve</h3>
-                     <p className="text-[#C5A059] font-medium tracking-wider uppercase text-[10px] md:text-xs">Founder, Current Financial</p>
+                   <div className="absolute bottom-4 left-4 right-4 md:bottom-8 md:left-8 glass-panel p-3 md:p-6 rounded-2xl border border-white/10 backdrop-blur-md">
+                     <h3 className="text-xl md:text-3xl font-heading font-bold text-white mb-1">Steve</h3>
+                     <p className="text-[#C5A059] font-medium tracking-wider uppercase text-[10px] md:text-xs">Founder, Current Financial Group</p>
                    </div>
                 </div>
               </FadeIn>
@@ -277,7 +289,7 @@ function App() {
               <div className="lg:col-span-7 flex flex-col justify-center gap-4 md:gap-6">
                 
                 <FadeIn delay={0.1} direction="left">
-                  <div className="glass-panel glass-panel-hover p-6 md:p-8 rounded-[20px] md:rounded-[32px] relative overflow-hidden group bg-gradient-to-br from-white/5 to-transparent border border-white/5 hover:border-[#C5A059]/30">
+                  <div className="glass-panel glass-panel-hover p-5 md:p-8 rounded-2xl md:rounded-[32px] relative overflow-hidden group bg-gradient-to-br from-white/5 to-transparent border border-white/5 hover:border-[#C5A059]/30">
                     <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-[#C5A059]/10 to-transparent rounded-full blur-2xl -mr-10 -mt-10 opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
                     <div className="flex items-start gap-4 md:gap-6">
                       <div className="w-10 h-10 md:w-14 md:h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center flex-shrink-0 group-hover:bg-[#C5A059]/10 group-hover:border-[#C5A059]/40 transition-all duration-300 shadow-inner group-hover:shadow-[0_0_20px_rgba(197,160,89,0.2)]">
@@ -294,7 +306,7 @@ function App() {
                 </FadeIn>
 
                 <FadeIn delay={0.2} direction="left">
-                  <div className="glass-panel glass-panel-hover p-6 md:p-8 rounded-[20px] md:rounded-[32px] relative overflow-hidden group bg-gradient-to-br from-white/5 to-transparent border border-white/5 hover:border-[#1B4986]/40">
+                  <div className="glass-panel glass-panel-hover p-5 md:p-8 rounded-2xl md:rounded-[32px] relative overflow-hidden group bg-gradient-to-br from-white/5 to-transparent border border-white/5 hover:border-[#1B4986]/40">
                      <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-[#1B4986]/20 to-transparent rounded-full blur-2xl -mr-10 -mt-10 opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
                     <div className="flex flex-col gap-4 md:gap-5">
                       <h4 className="text-lg md:text-xl font-heading font-semibold text-white">The 90-Day Standard</h4>
@@ -314,7 +326,7 @@ function App() {
                 </FadeIn>
 
                 <FadeIn delay={0.3} direction="left">
-                  <div className="glass-panel glass-panel-hover p-6 md:p-8 rounded-[20px] md:rounded-[32px] relative overflow-hidden group bg-gradient-to-br from-white/5 to-transparent border border-white/5 hover:border-[#C5A059]/30">
+                  <div className="glass-panel glass-panel-hover p-5 md:p-8 rounded-2xl md:rounded-[32px] relative overflow-hidden group bg-gradient-to-br from-white/5 to-transparent border border-white/5 hover:border-[#C5A059]/30">
                      <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-[#C5A059]/10 to-transparent rounded-full blur-2xl -mr-10 -mt-10 opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
                     <div className="flex items-start gap-4 md:gap-6">
                       <div className="w-10 h-10 md:w-14 md:h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center flex-shrink-0 group-hover:bg-[#C5A059]/10 group-hover:border-[#C5A059]/40 transition-all duration-300 shadow-inner group-hover:shadow-[0_0_20px_rgba(197,160,89,0.2)]">
@@ -350,7 +362,7 @@ function App() {
             <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 lg:gap-8">
               {/* Card 1 */}
               <FadeIn delay={0.1} className="h-full">
-                 <div className="h-full glass-panel glass-panel-hover p-6 md:p-8 rounded-[24px] md:rounded-[32px] flex flex-col group relative overflow-hidden border border-white/5 hover:border-[#1B4986]/30">
+                 <div className="h-full glass-panel glass-panel-hover p-5 md:p-8 rounded-2xl md:rounded-[32px] flex flex-col group relative overflow-hidden border border-white/5 hover:border-[#1B4986]/30">
                    <div className="absolute top-0 right-0 w-full h-full bg-gradient-to-bl from-[#1B4986]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
                    <div className="relative z-10">
                      <div className="w-12 h-12 md:w-16 md:h-16 rounded-[18px] bg-[#1B4986]/10 border border-[#1B4986]/30 flex items-center justify-center mb-6 text-[#1B4986] group-hover:bg-[#1B4986] group-hover:text-white group-hover:-translate-y-1 group-hover:shadow-[0_10px_20px_rgba(27,73,134,0.3)] transition-all duration-300">
@@ -366,7 +378,7 @@ function App() {
 
               {/* Card 2 */}
               <FadeIn delay={0.2} className="h-full">
-                 <div className="h-full glass-panel glass-panel-hover p-6 md:p-8 rounded-[24px] md:rounded-[32px] flex flex-col group relative overflow-hidden border border-white/5 hover:border-white/20">
+                 <div className="h-full glass-panel glass-panel-hover p-5 md:p-8 rounded-2xl md:rounded-[32px] flex flex-col group relative overflow-hidden border border-white/5 hover:border-white/20">
                    <div className="absolute top-0 right-0 w-full h-full bg-gradient-to-bl from-white/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
                    <div className="relative z-10">
                      <div className="w-12 h-12 md:w-16 md:h-16 rounded-[18px] bg-white/5 border border-white/10 flex items-center justify-center mb-6 text-white group-hover:bg-white group-hover:text-black group-hover:-translate-y-1 group-hover:shadow-[0_10px_20px_rgba(255,255,255,0.1)] transition-all duration-300">
@@ -382,7 +394,7 @@ function App() {
 
               {/* Card 3 */}
               <FadeIn delay={0.3} className="h-full sm:col-span-2 md:col-span-1">
-                 <div className="h-full glass-panel glass-panel-hover p-6 md:p-8 rounded-[24px] md:rounded-[32px] flex flex-col group relative overflow-hidden border border-white/5 hover:border-[#C5A059]/30">
+                 <div className="h-full glass-panel glass-panel-hover p-5 md:p-8 rounded-2xl md:rounded-[32px] flex flex-col group relative overflow-hidden border border-white/5 hover:border-[#C5A059]/30">
                    <div className="absolute top-0 right-0 w-full h-full bg-gradient-to-bl from-[#C5A059]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700"></div>
                    <div className="relative z-10">
                      <div className="w-12 h-12 md:w-16 md:h-16 rounded-[18px] bg-[#C5A059]/10 border border-[#C5A059]/30 flex items-center justify-center mb-6 text-[#C5A059] group-hover:bg-[#C5A059] group-hover:text-black group-hover:-translate-y-1 group-hover:shadow-[0_10px_20px_rgba(197,160,89,0.2)] transition-all duration-300">
@@ -400,7 +412,7 @@ function App() {
         </section>
 
         {/* SECTION 5: FAQ & FILTER */}
-        <section id="apply" className="w-full px-4 sm:px-6 pt-16 pb-20 md:py-32 relative bg-[#050505]">
+        <section className="w-full px-4 sm:px-6 pt-16 pb-20 md:py-32 relative bg-[#050505]">
           <div className="max-w-4xl mx-auto">
             
             <FadeIn className="text-center mb-12 md:mb-20">
@@ -429,37 +441,166 @@ function App() {
               </div>
             </FadeIn>
 
-            {/* Application Form Banner */}
-            <FadeIn delay={0.2}>
-              <div className="glass-panel p-[1px] rounded-[24px] md:rounded-[40px] group bg-gradient-to-b from-white/10 to-transparent overflow-hidden">
-                <div className="w-full bg-[#0A0A0A] rounded-[23px] md:rounded-[39px] min-h-[400px] md:min-h-[500px] flex flex-col items-center justify-center relative overflow-hidden group-hover:bg-[#0C0C0C] transition-colors duration-500">
-                  <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-48 md:w-96 h-48 md:h-96 bg-[#C5A059]/10 blur-[80px] rounded-full group-hover:bg-[#C5A059]/20 transition-colors duration-700"></div>
-                  
-                  <div className="text-center z-10 px-6 py-12 md:py-16">
-                    <motion.div 
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                      className="w-16 h-16 md:w-20 md:h-20 rounded-[20px] bg-gradient-to-br from-[#C5A059]/10 to-transparent border border-[#C5A059]/30 flex items-center justify-center mx-auto mb-6 md:mb-8 cursor-pointer shadow-[0_0_30px_rgba(197,160,89,0.15)] group-hover:border-[#C5A059]/60 transition-all duration-300"
-                    >
-                      <ChevronRight className="text-[#C5A059] w-8 h-8 md:w-10 md:h-10 ml-1" />
-                    </motion.div>
-                    <h3 className="text-2xl md:text-3xl font-heading font-medium text-white mb-3 md:mb-4">Begin Your Application</h3>
-                    <p className="text-sm md:text-base text-gray-500 font-light max-w-sm md:max-w-md mx-auto mb-8 md:mb-10 leading-relaxed">
-                      Click below to open the form. Ensure you have 5-10 minutes to complete the initial filter. We review applications daily.
-                    </p>
-                    
-                    <motion.button 
-                      whileHover={{ scale: 1.02 }}
-                      whileTap={{ scale: 0.98 }}
-                      onClick={() => setIsFormOpen(true)}
-                      className="px-8 py-4 md:px-10 md:py-4 bg-[#C5A059] text-black hover:bg-[#D4AF68] rounded-full font-bold transition-all flex items-center justify-center gap-2 mx-auto text-sm md:text-base shadow-[0_0_20px_rgba(197,160,89,0.3)] hover:shadow-[0_0_40px_rgba(197,160,89,0.5)]"
-                    >
-                      Start Filter Form <ArrowRight className="w-4 h-4" />
-                    </motion.button>
+            {/* Embedded Application Form */}
+            <div id="apply" className="scroll-mt-24 w-full">
+              <FadeIn delay={0.2}>
+                <div className="glass-panel p-[1px] rounded-[24px] md:rounded-[40px] bg-gradient-to-b from-white/10 to-transparent overflow-hidden">
+                  <div className="w-full bg-[#121212]/90 backdrop-blur-2xl rounded-[23px] md:rounded-[39px] flex flex-col relative overflow-hidden px-4 py-8 sm:p-10 md:p-12 shadow-[0_30px_70px_rgba(0,0,0,0.8)] border border-white/5">
+                    {/* Subtle Background Glow */}
+                    <div className="absolute top-0 right-0 w-64 h-64 bg-[#C5A059]/5 rounded-full blur-3xl pointer-events-none -mr-32 -mt-32"></div>
+                    <div className="absolute bottom-0 left-0 w-64 h-64 bg-[#1B4986]/5 rounded-full blur-3xl pointer-events-none -ml-32 -mb-32"></div>
+
+                    <div className="relative z-10 w-full">
+                      {formState.state === 'success' ? (
+                        <motion.div 
+                          initial={{ opacity: 0, scale: 0.95 }}
+                          animate={{ opacity: 1, scale: 1 }}
+                          className="py-16 md:py-24 flex flex-col items-center text-center max-w-lg mx-auto"
+                        >
+                          <div className="w-20 h-20 bg-[#C5A059]/25 rounded-full flex items-center justify-center mb-6 shadow-[0_0_30px_rgba(197,160,89,0.2)]">
+                            <CheckCircle2 className="w-10 h-10 text-[#C5A059]" />
+                          </div>
+                          <h3 className="text-2xl md:text-3xl font-bold text-white mb-4">Application Received</h3>
+                          <p className="text-gray-400 font-light leading-relaxed text-sm md:text-base">
+                            Thank you for applying. We will review your details and reach out within 24 hours if there is a mutual fit.
+                          </p>
+                        </motion.div>
+                      ) : (
+                        <div className="space-y-6 sm:space-y-8">
+                          {/* Section Header inside the card */}
+                          <div className="text-center max-w-xl mx-auto border-b border-white/5 pb-5 sm:pb-6">
+                            <div className="inline-flex items-center gap-1.5 py-1 px-3.5 rounded-full bg-[#C5A059]/10 border border-[#C5A059]/20 shadow-[0_0_15px_rgba(197,160,89,0.05)] mb-3">
+                              <span className="text-[9px] text-[#E2C792] font-semibold uppercase tracking-wider">Fast-Track Agency Filter</span>
+                            </div>
+                            <h3 className="text-xl sm:text-2xl md:text-3xl font-heading font-semibold text-white mb-2">Begin Your Application</h3>
+                            <p className="text-xs sm:text-sm text-gray-400 font-light leading-relaxed">
+                              Ensure you have 5-10 minutes to complete the initial filter. We review applications daily.
+                            </p>
+                          </div>
+
+                          <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-6 max-w-3xl mx-auto text-left">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+                              <div className="space-y-1.5 sm:space-y-2">
+                                <label className="text-[11px] uppercase tracking-widest text-gray-400 font-medium ml-1">First Name</label>
+                                <div className="relative group">
+                                  <div className="absolute inset-y-0 left-0 pl-4 sm:pl-5 flex items-center pointer-events-none text-gray-500 group-focus-within:text-[#C5A059] transition-colors duration-300">
+                                    <User className="w-4 h-4 sm:w-4.5 sm:h-4.5" />
+                                  </div>
+                                  <input 
+                                    required 
+                                    type="text" 
+                                    className="w-full bg-black/40 hover:bg-black/50 hover:border-white/20 focus:bg-black/75 border border-white/10 rounded-2xl pl-11 sm:pl-12 pr-4 py-3.5 sm:py-4 text-white text-base focus:outline-none focus:border-[#C5A059] focus:ring-1 focus:ring-[#C5A059]/30 transition-all placeholder-gray-500 shadow-inner focus:shadow-[0_0_20px_rgba(197,160,89,0.15)]" 
+                                    placeholder="John" 
+                                  />
+                                </div>
+                              </div>
+                              <div className="space-y-1.5 sm:space-y-2">
+                                <label className="text-[11px] uppercase tracking-widest text-gray-400 font-medium ml-1">Last Name</label>
+                                <div className="relative group">
+                                  <div className="absolute inset-y-0 left-0 pl-4 sm:pl-5 flex items-center pointer-events-none text-gray-500 group-focus-within:text-[#C5A059] transition-colors duration-300">
+                                    <User className="w-4 h-4 sm:w-4.5 sm:h-4.5" />
+                                  </div>
+                                  <input 
+                                    required 
+                                    type="text" 
+                                    className="w-full bg-black/40 hover:bg-black/50 hover:border-white/20 focus:bg-black/75 border border-white/10 rounded-2xl pl-11 sm:pl-12 pr-4 py-3.5 sm:py-4 text-white text-base focus:outline-none focus:border-[#C5A059] focus:ring-1 focus:ring-[#C5A059]/30 transition-all placeholder-gray-500 shadow-inner focus:shadow-[0_0_20px_rgba(197,160,89,0.15)]" 
+                                    placeholder="Doe" 
+                                  />
+                                </div>
+                              </div>
+                            </div>
+
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+                              <div className="space-y-1.5 sm:space-y-2">
+                                <label className="text-[11px] uppercase tracking-widest text-gray-400 font-medium ml-1">Email Address</label>
+                                <div className="relative group">
+                                  <div className="absolute inset-y-0 left-0 pl-4 sm:pl-5 flex items-center pointer-events-none text-gray-500 group-focus-within:text-[#C5A059] transition-colors duration-300">
+                                    <Mail className="w-4 h-4 sm:w-4.5 sm:h-4.5" />
+                                  </div>
+                                  <input 
+                                    required 
+                                    type="email" 
+                                    className="w-full bg-black/40 hover:bg-black/50 hover:border-white/20 focus:bg-black/75 border border-white/10 rounded-2xl pl-11 sm:pl-12 pr-4 py-3.5 sm:py-4 text-white text-base focus:outline-none focus:border-[#C5A059] focus:ring-1 focus:ring-[#C5A059]/30 transition-all placeholder-gray-500 shadow-inner focus:shadow-[0_0_20px_rgba(197,160,89,0.15)]" 
+                                    placeholder="john@example.com" 
+                                  />
+                                </div>
+                              </div>
+                              <div className="space-y-1.5 sm:space-y-2">
+                                <label className="text-[11px] uppercase tracking-widest text-gray-400 font-medium ml-1">Phone Number</label>
+                                <div className="relative group">
+                                  <div className="absolute inset-y-0 left-0 pl-4 sm:pl-5 flex items-center pointer-events-none text-gray-500 group-focus-within:text-[#C5A059] transition-colors duration-300">
+                                    <Phone className="w-4 h-4 sm:w-4.5 sm:h-4.5" />
+                                  </div>
+                                  <input 
+                                    required 
+                                    type="tel" 
+                                    className="w-full bg-black/40 hover:bg-black/50 hover:border-white/20 focus:bg-black/75 border border-white/10 rounded-2xl pl-11 sm:pl-12 pr-4 py-3.5 sm:py-4 text-white text-base focus:outline-none focus:border-[#C5A059] focus:ring-1 focus:ring-[#C5A059]/30 transition-all placeholder-gray-500 shadow-inner focus:shadow-[0_0_20px_rgba(197,160,89,0.15)]" 
+                                    placeholder="(555) 000-0000" 
+                                  />
+                                </div>
+                              </div>
+                            </div>
+
+                            <div className="space-y-1.5 sm:space-y-2 relative">
+                              <label className="text-[11px] uppercase tracking-widest text-gray-400 font-medium ml-1">Are you currently licensed?</label>
+                              <div className="relative group">
+                                <div className="absolute inset-y-0 left-0 pl-4 sm:pl-5 flex items-center pointer-events-none text-gray-500 group-focus-within:text-[#C5A059] transition-colors duration-300">
+                                  <Shield className="w-4 h-4 sm:w-4.5 sm:h-4.5" />
+                                </div>
+                                <select 
+                                  required 
+                                  className="w-full bg-black/40 hover:bg-black/50 hover:border-white/20 focus:bg-black/75 border border-white/10 rounded-2xl pl-11 sm:pl-12 pr-10 py-3.5 sm:py-4 text-white text-base focus:outline-none focus:border-[#C5A059] focus:ring-1 focus:ring-[#C5A059]/30 transition-all appearance-none shadow-inner cursor-pointer focus:shadow-[0_0_20px_rgba(197,160,89,0.15)]"
+                                >
+                                  <option value="" className="bg-[#0A0A0A]">Select an option</option>
+                                  <option value="yes" className="bg-[#0A0A0A]">Yes, I am currently licensed</option>
+                                  <option value="no" className="bg-[#0A0A0A]">No, I am not licensed yet</option>
+                                  <option value="course" className="bg-[#0A0A0A]">No, but I am in a course</option>
+                                </select>
+                                <div className="absolute inset-y-0 right-0 flex items-center pr-4 pointer-events-none text-gray-400 group-focus-within:text-[#C5A059] transition-colors">
+                                  <ChevronDown className="w-4 h-4" />
+                                </div>
+                              </div>
+                            </div>
+
+                            <div className="space-y-1.5 sm:space-y-2">
+                              <label className="text-[11px] uppercase tracking-widest text-gray-400 font-medium ml-1">Why are you a good fit?</label>
+                              <div className="relative group">
+                                <div className="absolute top-4 left-0 pl-4 sm:pl-5 flex items-start pointer-events-none text-gray-500 group-focus-within:text-[#C5A059] transition-colors duration-300">
+                                  <MessageSquare className="w-4 h-4 sm:w-4.5 sm:h-4.5" />
+                                </div>
+                                <textarea 
+                                  required 
+                                  rows={4} 
+                                  className="w-full bg-black/40 hover:bg-black/50 hover:border-white/20 focus:bg-black/75 border border-white/10 rounded-2xl pl-11 sm:pl-12 pr-4 py-3.5 sm:py-4 text-white text-base focus:outline-none focus:border-[#C5A059] focus:ring-1 focus:ring-[#C5A059]/30 transition-all placeholder-gray-500 resize-none shadow-inner focus:shadow-[0_0_20px_rgba(197,160,89,0.15)]" 
+                                  placeholder="Briefly explain your background, work ethic, or what you hope to achieve..."
+                                ></textarea>
+                              </div>
+                            </div>
+
+                            <button 
+                              type="submit" 
+                              disabled={formState.state === 'submitting'}
+                              className="w-full bg-gradient-to-r from-[#C5A059] to-[#D4AF68] text-black font-bold py-3.5 sm:py-4 rounded-2xl hover:opacity-90 active:scale-[0.99] transition-all disabled:opacity-50 flex items-center justify-center gap-2 mt-6 sm:mt-8 text-sm sm:text-base shadow-[0_0_20px_rgba(197,160,89,0.3)] hover:shadow-[0_0_40px_rgba(197,160,89,0.5)] cursor-pointer"
+                            >
+                              {formState.state === 'submitting' ? (
+                                <>
+                                  <div className="w-5 h-5 border-2 border-black/20 border-t-black rounded-full animate-spin"></div>
+                                  Submitting Application...
+                                </>
+                              ) : (
+                                <>
+                                  Submit Application <ArrowRight className="w-5 h-5" />
+                                </>
+                              )}
+                            </button>
+                          </form>
+                        </div>
+                      )}
+                    </div>
                   </div>
                 </div>
-              </div>
-            </FadeIn>
+              </FadeIn>
+            </div>
 
           </div>
         </section>
@@ -476,6 +617,7 @@ function App() {
             >
               <motion.a 
                 href="#apply"
+                onClick={scrollToApplication}
                 whileTap={{ scale: 0.96 }}
                 className="w-full flex items-center justify-center gap-2 bg-gradient-to-r from-[#C5A059] to-[#D4AF68] text-black px-6 py-4 rounded-2xl font-bold pointer-events-auto shadow-[0_10px_30px_rgba(197,160,89,0.3)] text-base overflow-hidden relative"
               >
@@ -486,111 +628,7 @@ function App() {
           )}
         </AnimatePresence>
 
-        {/* Form Modal */}
-        <AnimatePresence>
-          {isFormOpen && (
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6"
-            >
-              <div 
-                className="absolute inset-0 bg-black/80 backdrop-blur-xl"
-                onClick={() => setIsFormOpen(false)}
-              ></div>
-              
-              <motion.div
-                initial={{ scale: 0.95, y: 20, opacity: 0 }}
-                animate={{ scale: 1, y: 0, opacity: 1 }}
-                exit={{ scale: 0.95, y: 20, opacity: 0 }}
-                className="relative w-full max-w-xl glass-panel bg-[#0A0A0A]/90 border border-white/10 rounded-[32px] p-6 sm:p-10 shadow-2xl overflow-y-auto max-h-[90vh] custom-scrollbar"
-                onClick={(e) => e.stopPropagation()}
-              >
-                {/* Background Glow */}
-                <div className="absolute top-0 right-0 w-64 h-64 bg-[#C5A059]/10 rounded-full blur-3xl pointer-events-none -mr-32 -mt-32"></div>
 
-                <div className="flex justify-between items-center mb-8 relative z-10 shrink-0">
-                  <div>
-                    <h3 className="text-2xl font-bold text-white mb-2">Agency Application</h3>
-                    <p className="text-sm text-gray-400">Complete this filter to see if you're a fit.</p>
-                  </div>
-                  <button 
-                    onClick={() => setIsFormOpen(false)}
-                    className="w-10 h-10 rounded-full bg-white/5 hover:bg-white/10 flex items-center justify-center text-gray-400 hover:text-white transition-colors"
-                  >
-                    <X className="w-5 h-5" />
-                  </button>
-                </div>
-
-                {formState.state === 'success' ? (
-                  <motion.div 
-                    initial={{ opacity: 0, scale: 0.9 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    className="py-12 flex flex-col items-center text-center relative z-10"
-                  >
-                    <div className="w-20 h-20 bg-[#C5A059]/20 rounded-full flex items-center justify-center mb-6">
-                      <CheckCircle2 className="w-10 h-10 text-[#C5A059]" />
-                    </div>
-                    <h4 className="text-2xl font-bold text-white mb-3">Application Received</h4>
-                    <p className="text-gray-400 max-w-sm">We'll review your details and reach out within 24 hours if there's a mutual fit.</p>
-                  </motion.div>
-                ) : (
-                  <form onSubmit={handleSubmit} className="space-y-4 relative z-10">
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      <div className="space-y-2">
-                        <label className="text-[10px] uppercase tracking-widest text-gray-500 font-medium ml-2">First Name</label>
-                        <input required type="text" className="w-full bg-black/50 border border-white/10 rounded-2xl px-4 py-3 text-white focus:outline-none focus:border-[#C5A059]/50 transition-colors" placeholder="John" />
-                      </div>
-                      <div className="space-y-2">
-                        <label className="text-[10px] uppercase tracking-widest text-gray-500 font-medium ml-2">Last Name</label>
-                        <input required type="text" className="w-full bg-black/50 border border-white/10 rounded-2xl px-4 py-3 text-white focus:outline-none focus:border-[#C5A059]/50 transition-colors" placeholder="Doe" />
-                      </div>
-                    </div>
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                      <div className="space-y-2">
-                        <label className="text-[10px] uppercase tracking-widest text-gray-500 font-medium ml-2">Email Address</label>
-                        <input required type="email" className="w-full bg-black/50 border border-white/10 rounded-2xl px-4 py-3 text-white focus:outline-none focus:border-[#C5A059]/50 transition-colors" placeholder="john@example.com" />
-                      </div>
-                      <div className="space-y-2">
-                        <label className="text-[10px] uppercase tracking-widest text-gray-500 font-medium ml-2">Phone Number</label>
-                        <input required type="tel" className="w-full bg-black/50 border border-white/10 rounded-2xl px-4 py-3 text-white focus:outline-none focus:border-[#C5A059]/50 transition-colors" placeholder="(555) 000-0000" />
-                      </div>
-                    </div>
-                    <div className="space-y-2">
-                      <label className="text-[10px] uppercase tracking-widest text-gray-500 font-medium ml-2">Are you currently licensed?</label>
-                      <select required className="w-full bg-black/50 border border-white/10 rounded-2xl px-4 py-3 text-white filter-none focus:outline-none focus:border-[#C5A059]/50 transition-colors appearance-none">
-                        <option value="" className="bg-[#0A0A0A]">Select an option</option>
-                        <option value="yes" className="bg-[#0A0A0A]">Yes, I am currently licensed</option>
-                        <option value="no" className="bg-[#0A0A0A]">No, I am not licensed yet</option>
-                        <option value="course" className="bg-[#0A0A0A]">No, but I am in a course</option>
-                      </select>
-                    </div>
-                    <div className="space-y-2">
-                      <label className="text-[10px] uppercase tracking-widest text-gray-500 font-medium ml-2">Why are you a good fit?</label>
-                      <textarea required rows={3} className="w-full bg-black/50 border border-white/10 rounded-2xl px-4 py-3 text-white focus:outline-none focus:border-[#C5A059]/50 transition-colors resize-none" placeholder="Briefly explain your background..."></textarea>
-                    </div>
-                    
-                    <button 
-                      type="submit" 
-                      disabled={formState.state === 'submitting'}
-                      className="w-full mt-6 bg-gradient-to-r from-[#C5A059] to-[#D4AF68] text-black font-bold py-4 rounded-2xl hover:opacity-90 transition-opacity disabled:opacity-50 flex items-center justify-center gap-2"
-                    >
-                      {formState.state === 'submitting' ? (
-                        <>
-                          <div className="w-5 h-5 border-2 border-black/20 border-t-black rounded-full animate-spin"></div>
-                          Submitting...
-                        </>
-                      ) : (
-                        'Submit Application'
-                      )}
-                    </button>
-                  </form>
-                )}
-              </motion.div>
-            </motion.div>
-          )}
-        </AnimatePresence>
 
       </main>
 
@@ -608,7 +646,7 @@ function App() {
                 <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#C5A059] to-[#8C6D33] flex items-center justify-center shadow-lg">
                   <span className="font-heading font-bold text-black text-lg">CF</span>
                 </div>
-                <span className="font-heading font-bold tracking-tight text-white text-xl">Current Financial</span>
+                <span className="font-heading font-bold tracking-tight text-white text-xl">Current Financial Group</span>
               </div>
               <p className="text-gray-400 font-light text-sm md:text-base leading-relaxed mb-8 max-w-sm">
                 The modern agency standard. Build a 100% virtual, residual-income business with the industry's most advanced proprietary lead ecosystem.
@@ -627,7 +665,7 @@ function App() {
             <div>
               <h4 className="text-white font-heading font-semibold mb-6">Partnership</h4>
               <ul className="space-y-4">
-                <li><a href="#apply" className="text-gray-400 hover:text-white transition-colors text-sm font-light flex items-center gap-2"><div className="w-1 h-1 rounded-full bg-[#C5A059]"></div> Apply Now</a></li>
+                <li><a href="#apply" onClick={scrollToApplication} className="text-gray-400 hover:text-white transition-colors text-sm font-light flex items-center gap-2"><div className="w-1 h-1 rounded-full bg-[#C5A059]"></div> Apply Now</a></li>
                 <li><a href="#" className="text-gray-400 hover:text-white transition-colors text-sm font-light">The System</a></li>
                 <li><a href="#" className="text-gray-400 hover:text-white transition-colors text-sm font-light">Mentorship</a></li>
                 <li><a href="#" className="text-gray-400 hover:text-white transition-colors text-sm font-light">Compensation</a></li>
@@ -642,7 +680,7 @@ function App() {
               <ul className="space-y-4">
                 <li className="flex items-start gap-3">
                   <Mail className="w-4 h-4 text-[#C5A059] mt-0.5" />
-                  <span className="text-gray-400 text-sm font-light">support@currentfinancial.com</span>
+                  <span className="text-gray-400 text-sm font-light">support@currentfinancialgroup.com</span>
                 </li>
                 <li className="flex items-start gap-3">
                   <Phone className="w-4 h-4 text-[#C5A059] mt-0.5" />
@@ -665,7 +703,7 @@ function App() {
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-10 text-[10px] md:text-xs text-gray-500 leading-relaxed font-light mb-8">
               <div>
                 <h5 className="font-semibold text-gray-300 uppercase tracking-widest text-[9px] mb-2">Independence Statement</h5>
-                <p>Current Financial is an independent insurance agency. We are not employees or legal representatives of UniTrust Financial Group, any parent company, or any government agency. All agents operate as fully independent 1099 contractors.</p>
+                <p>Current Financial Group is an independent insurance agency. We are not employees or legal representatives of UniTrust Financial Group, any parent company, or any government agency. All agents operate as fully independent 1099 contractors.</p>
               </div>
               <div>
                 <h5 className="font-semibold text-gray-300 uppercase tracking-widest text-[9px] mb-2">Earnings Disclaimer</h5>
@@ -683,7 +721,7 @@ function App() {
                 <img src={unitrustLogo} alt="UniTrust Financial Group" className="h-5 mix-blend-multiply brightness-75 contrast-125" />
               </div>
               <p className="text-[10px] md:text-xs text-gray-600 uppercase tracking-widest">
-                &copy; {new Date().getFullYear()} Current Financial. All rights reserved.
+                &copy; {new Date().getFullYear()} Current Financial Group. All rights reserved.
               </p>
             </div>
           </div>
