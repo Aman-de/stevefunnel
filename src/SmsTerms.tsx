@@ -7,6 +7,14 @@ export default function SmsTerms() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (isConsented && name && email && phone) {
+      setIsSubmitted(true);
+    }
+  };
 
   return (
     <div className="min-h-screen bg-[#0A0A0A] text-gray-100 font-sans selection:bg-[#C5A059]/30 selection:text-white flex flex-col">
@@ -47,13 +55,14 @@ export default function SmsTerms() {
                 </p>
               </div>
 
-              <div className="mt-8 pt-6 border-t border-white/10 flex flex-col items-center text-left">
+              <form onSubmit={handleSubmit} className="mt-8 pt-6 border-t border-white/10 flex flex-col items-center text-left">
                 <div className="w-full space-y-4 mb-6">
                   <div>
-                    <label htmlFor="name" className="block text-sm font-medium text-gray-400 mb-1 ml-1">Full Name</label>
+                    <label htmlFor="name" className="block text-sm font-medium text-gray-400 mb-1 ml-1">Full Name <span className="text-[#C5A059]">*</span></label>
                     <input 
                       type="text" 
                       id="name"
+                      required
                       value={name}
                       onChange={(e) => setName(e.target.value)}
                       className="w-full bg-black/20 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:border-[#C5A059]/50 focus:ring-1 focus:ring-[#C5A059]/50 transition-all"
@@ -61,10 +70,11 @@ export default function SmsTerms() {
                     />
                   </div>
                   <div>
-                    <label htmlFor="phone" className="block text-sm font-medium text-gray-400 mb-1 ml-1">Phone Number</label>
+                    <label htmlFor="phone" className="block text-sm font-medium text-gray-400 mb-1 ml-1">Phone Number <span className="text-[#C5A059]">*</span></label>
                     <input 
                       type="tel" 
                       id="phone"
+                      required
                       value={phone}
                       onChange={(e) => setPhone(e.target.value)}
                       className="w-full bg-black/20 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:border-[#C5A059]/50 focus:ring-1 focus:ring-[#C5A059]/50 transition-all"
@@ -72,10 +82,11 @@ export default function SmsTerms() {
                     />
                   </div>
                   <div>
-                    <label htmlFor="email" className="block text-sm font-medium text-gray-400 mb-1 ml-1">Email Address</label>
+                    <label htmlFor="email" className="block text-sm font-medium text-gray-400 mb-1 ml-1">Email Address <span className="text-[#C5A059]">*</span></label>
                     <input 
                       type="email" 
                       id="email"
+                      required
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       className="w-full bg-black/20 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-600 focus:outline-none focus:border-[#C5A059]/50 focus:ring-1 focus:ring-[#C5A059]/50 transition-all"
@@ -90,6 +101,7 @@ export default function SmsTerms() {
                       <input 
                         type="checkbox" 
                         className="sr-only" 
+                        required
                         checked={isConsented}
                         onChange={(e) => setIsConsented(e.target.checked)}
                       />
@@ -102,11 +114,11 @@ export default function SmsTerms() {
                       </div>
                     </div>
                     <span className={`text-sm transition-colors leading-relaxed ${isConsented ? 'text-white' : 'text-gray-300 group-hover:text-white'}`}>
-                      I agree to receive SMS messages from Current Financial Group about career opportunities. Message frequency varies. Message and data rates may apply. Reply STOP to opt out. Reply HELP for help.
+                      I agree to receive SMS messages from Current Financial Group about career opportunities. Message frequency varies. Message and data rates may apply. Reply STOP to opt out. Reply HELP for help. <span className="text-[#C5A059]">*</span>
                     </span>
                   </label>
                   
-                  <div className={`overflow-hidden transition-all duration-500 ease-out ${isConsented ? 'max-h-24 opacity-100 mt-3' : 'max-h-0 opacity-0 mt-0'}`}>
+                  <div className={`overflow-hidden transition-all duration-500 ease-out ${isSubmitted ? 'max-h-24 opacity-100 mt-3' : 'max-h-0 opacity-0 mt-0'}`}>
                     <div className="px-4 py-3 mx-2 rounded-lg bg-[#C5A059]/10 border border-[#C5A059]/20 flex items-center gap-3 transform transition-transform duration-500">
                       <div className="w-8 h-8 shrink-0 rounded-full bg-[#C5A059]/20 flex items-center justify-center">
                         <Check className="w-4 h-4 text-[#C5A059]" strokeWidth={3} />
@@ -117,13 +129,23 @@ export default function SmsTerms() {
                     </div>
                   </div>
                 </div>
+
+                <div className="w-full mt-6">
+                  <button 
+                    type="submit"
+                    disabled={!isConsented || !name || !email || !phone || isSubmitted}
+                    className="w-full bg-gradient-to-r from-[#C5A059] to-[#8C6D33] hover:from-[#d1b072] hover:to-[#9f7d3c] text-black font-bold py-3 md:py-4 rounded-xl transition-all disabled:opacity-50 disabled:cursor-not-allowed shadow-[0_0_15px_rgba(197,160,89,0.3)] hover:shadow-[0_0_25px_rgba(197,160,89,0.5)] disabled:shadow-none"
+                  >
+                    {isSubmitted ? 'Submitted Successfully' : 'Submit Application'}
+                  </button>
+                </div>
                 
                 <div className="w-full mt-8 pt-6 border-t border-white/10 text-center">
                   <p className="text-sm text-gray-400">
                     For support contact us at <a href="mailto:steven@currentfinancialgroup.com" className="text-white hover:text-[#C5A059] transition-colors underline underline-offset-2">steven@currentfinancialgroup.com</a>
                   </p>
                 </div>
-              </div>
+              </form>
             </div>
           </div>
         </div>
